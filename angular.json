@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "login-with-angular"
+    }
+  },
+  "defaultProject": "login-with-angular",
+  "cli": {
+    "analytics": "0379373f-f999-483a-b053-9d5d89a83a68"
+  }
 }
