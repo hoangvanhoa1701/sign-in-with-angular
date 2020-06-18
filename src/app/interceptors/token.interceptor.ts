@@ -3,27 +3,30 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpHeaders
+  HttpInterceptor,
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CookieService} from "ngx-cookie-service";
+import {AuthService} from "../services";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
   constructor(
-    private cookieService: CookieService
+    private authService: AuthService
   ) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    // add authorization header with jwt token if available
+    let currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${currentUser}`
+        }
+      });
+    }
 
-    // token
-    const headers = new HttpHeaders();
-    const token =  this.cookieService.get('cookie-test')
-    headers.append('Authorization', `Bearer ${token}`)
-
-    const cloneRequest = request.clone({headers})
-    return next.handle(cloneRequest);
+    return next.handle(request);
   }
 }

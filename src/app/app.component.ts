@@ -27,12 +27,15 @@ export class AppComponent {
     this.authService.currentUser.subscribe(token => {
       this.currentUser = token
     })
-
   }
 
   signOut() {
-    this.authService.signOut();
-    this.cookieService.delete('cookie-test');
-    this.router.navigate(['/sign-in']);
+    this.authService.signOut()
+      .subscribe(resp => {
+        this.authService.currentUserValue = '';
+        this.cookieService.delete('cookie-test');
+        this.router.navigate(['/sign-in']);
+      });
+
   }
 }

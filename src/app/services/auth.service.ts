@@ -23,7 +23,8 @@ export class AuthService {
   }
 
   signOut() {
-    this.currentUserValue = ''
+    return this.http.delete<any>
+    ('https://nishimatsuya.newphoria.net/json/api/admin/logout');
   }
 
   signIn(login_id: string, login_password: string) {
