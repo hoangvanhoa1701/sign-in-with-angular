@@ -33,7 +33,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     })
 
@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
     }
 
     this.authService.signIn(
-      this.signInForm.get('username').value,
+      this.signInForm.get('email').value,
       this.signInForm.get('password').value).subscribe(resp => {
       // login successful if there's a jwt token in the response
       if (resp.data && resp.data.token) {

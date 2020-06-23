@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {first} from "rxjs/operators";
 import {AlertService, AuthService, UserService} from "../../services";
 
 @Component({
@@ -20,17 +19,17 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private alertService: AlertService ) {
-    // // redirect to home if already logged in
-    // if (this.authService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+    // redirect to home if already logged in
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
