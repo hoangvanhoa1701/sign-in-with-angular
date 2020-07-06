@@ -1,0 +1,10 @@
+.header-in-page{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  .header-in-page__title{
+    margin-bottom: 0;
+  }
+}

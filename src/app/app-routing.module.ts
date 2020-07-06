@@ -23,6 +23,11 @@ const routes: Routes = [
     component: SignupComponent
   },
   {
+    path: 'banners',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/banners/banner.module').then((m) => m.BannerModule),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },
